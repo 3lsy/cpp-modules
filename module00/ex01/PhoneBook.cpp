@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:21:30 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/07 21:31:36 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:19:02 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,36 +66,18 @@ PhoneBook::PhoneBook(void)
 				index = index_str[0] - '0';
 			if (this->contacts[index].first_name != "")
 			{
-				int spaces = 0;
 				std::cout << "index     |first name|last name |nickname  " << std::endl;
 				std::cout << index << "         |";
 				if (this->contacts[index].first_name.length() < 10)
-				{
-					spaces = 10 - this->contacts[index].first_name.length();
-					std::cout << this->contacts[index].first_name;
-					for (int i = 0; i < spaces; i++)
-						std::cout << " ";
-					std::cout << "|";
-				}
+					std::cout << std::left << std::setfill(' ') << std::setw(10) << this->contacts[index].first_name << "|";
 				else
 					std::cout << this->contacts[index].first_name.substr(0, 9) << "." << "|";
 				if (this->contacts[index].last_name.length() < 10)
-				{
-					spaces = 10 - this->contacts[index].last_name.length();
-					std::cout << this->contacts[index].last_name;
-					for (int i = 0; i < spaces; i++)
-						std::cout << " ";
-					std::cout << "|";
-				}
+					std::cout << std::left << std::setfill(' ') << std::setw(10) << this->contacts[index].last_name << "|";
 				else
 					std::cout << this->contacts[index].last_name.substr(0, 9) << "." << "|";
 				if (this->contacts[index].nickname.length() < 10)
-				{
-					spaces = 10 - this->contacts[index].nickname.length();
-					std::cout << this->contacts[index].nickname;
-					for (int i = 0; i < spaces; i++)
-						std::cout << " ";
-				}
+					std::cout << std::left << std::setfill(' ') << std::setw(10) << this->contacts[index].nickname;
 				else
 					std::cout << this->contacts[index].nickname.substr(0, 9) << ".";
 				std::cout << std::endl;
