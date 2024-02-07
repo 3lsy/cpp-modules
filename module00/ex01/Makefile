@@ -6,17 +6,17 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/02/06 19:41:51 by echavez-         ###   ########.fr        #
+#    Updated: 2024/02/06 20:06:06 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	megaphone
+NAME		=	phonebook
 
 #***************** SRC* *******************#
 
 DIRSRC		=	./
 
-SRC			=	megaphone.cpp
+SRC			=	PhoneBook.cpp Contact.cpp main.cpp
 
 SRCS		=	$(SRC)
 
@@ -36,7 +36,7 @@ CFLAGS		=
 CFLAGS		=	-Wall -Wextra -Werror -ansi -pedantic -g
 	endif
 else
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CFLAGS		=	-Wall -Wextra -Werror
 endif
 
 CC			=	/usr/bin/clang++
@@ -58,10 +58,11 @@ E0M			=	 "\e[0m"
 #************************ MAIN COMPILATION *************************
 
 $(NAME)	:		$(OBJS)
-				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INC_LIB)
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean	:
 				@($(RM) $(OBJS))
+				@($(RM) $(DEPS))
 				@$(ECHO) $(RED)'> Directory cleaned'$(E0M)
 
 all		:		$(NAME)
