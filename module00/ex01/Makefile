@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/02/06 20:06:06 by echavez-         ###   ########.fr        #
+#    Updated: 2024/02/09 18:23:00 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CFLAGS		=
 CFLAGS		=	-Wall -Wextra -Werror -ansi -pedantic -g
 	endif
 else
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98
 endif
 
 CC			=	/usr/bin/clang++

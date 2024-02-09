@@ -6,17 +6,17 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/02/09 18:15:45 by echavez-         ###   ########.fr        #
+#    Updated: 2024/02/09 18:38:19 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	accounting
+NAME		=	ex00
 
 #***************** SRC* *******************#
 
 DIRSRC		=	./
 
-SRC			=	Account.cpp tests.cpp
+SRC			=	Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
 
 SRCS		=	$(SRC)
 
@@ -33,7 +33,7 @@ ifdef FLAGS
 CFLAGS		=
 	endif
 	ifeq ($(FLAGS), debug)
-CFLAGS		=	-Wall -Wextra -Werror -ansi -pedantic -g
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -ansi -pedantic -g
 	endif
 else
 CFLAGS		=	-Wall -Wextra -Werror -std=c++98
@@ -42,13 +42,6 @@ endif
 CC			=	/usr/bin/clang++
 RM			=	/bin/rm -f
 ECHO		=	/bin/echo -e
-BOLD		=	"\e[1m"
-BLINK		=	 "\e[5m"
-RED			=	 "\e[38;2;255;0;0m"
-GREEN		=	 "\e[92m"
-BLUE		=	 "\e[34m"
-YELLOW		=	 "\e[33m"
-E0M			=	 "\e[0m"
 
 #************************ DEPS COMPILATION *************************
 

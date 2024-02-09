@@ -6,15 +6,12 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 23:38:26 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/09 17:20:46 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:30:42 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <iomanip>
 #include <ctime>
-#include <string>
-#include <chrono>
 #include "Account.hpp"
 
 int Account::_nbAccounts = 0;
@@ -128,15 +125,12 @@ void Account::displayStatus( void ) const
 
 void Account::_displayTimestamp( void )
 {
-	// Get the current time
-    auto now = std::chrono::system_clock::now();
-    // Convert the time point to a time_t object
-    std::time_t time = std::chrono::system_clock::to_time_t(now);
-    // Convert the time_t object to a tm structure
-    std::tm* timeinfo = std::localtime(&time);
-	// Format the time as a string
-    std::ostringstream oss;
-    oss << "[" << std::put_time(timeinfo, "%Y%m%d_%H%M%S") << "]";
-    std::string formatted_time = oss.str();
-    std::cout << formatted_time << " ";
+	std::time_t rawtime;
+    std::time(&rawtime);
+    std::tm* timeinfo = std::localtime(&rawtime);
+    
+    char timestamp[20];
+    std::strftime(timestamp, sizeof(timestamp), "[%Y%m%d_%H%M%S]", timeinfo);
+
+    std::cout << timestamp << " ";
 }
