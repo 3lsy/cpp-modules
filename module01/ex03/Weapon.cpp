@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:31:16 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/11 17:48:56 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:08:14 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Weapon::Weapon(std::string type)
 
 Weapon::~Weapon()
 {
-	std::cout << this->_type << " weapon has been destroyed" << std::endl;
+	//std::cout << this->_type << " weapon has been destroyed" << std::endl;
 }
 
 //Returning a reference allows the caller to access the actual string stored in the Weapon object without making a copy of it
