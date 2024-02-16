@@ -3,6 +3,8 @@ megaphone
 phonebook
 accounting
 
+*.replace
+
 level00
 level01
 level02

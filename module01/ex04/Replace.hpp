@@ -6,13 +6,16 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 18:13:08 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/11 18:23:32 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:51:38 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
-#include <fstream>
+#ifndef REPLACE_H
+# define REPLACE_H
+
+# include <iostream>
+# include <string>
+# include <fstream>
 
 class Replace
 {
@@ -25,3 +28,5 @@ class Replace
 		~Replace();
 		void	replace();
 };
+
+#endif
