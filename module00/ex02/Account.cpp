@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 23:38:26 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/09 18:30:42 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/17 12:43:33 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,16 @@ void Account::displayStatus( void ) const
 
 void Account::_displayTimestamp( void )
 {
-	std::time_t rawtime;
+    // Declare a variable to hold the raw time value
+    std::time_t rawtime;
+    // Get the current time in seconds since the epoch (1970-01-01 00:00:00 UTC)
     std::time(&rawtime);
+    // Convert the raw time value to a tm structure, representing the local time
     std::tm* timeinfo = std::localtime(&rawtime);
-    
+    // Declare a character array to hold the formatted timestamp
     char timestamp[20];
+    // Format the time information into the timestamp array using strftime
     std::strftime(timestamp, sizeof(timestamp), "[%Y%m%d_%H%M%S]", timeinfo);
-
+    // Output the formatted timestamp followed by a space character
     std::cout << timestamp << " ";
 }
