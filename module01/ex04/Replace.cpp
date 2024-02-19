@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 18:22:31 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/16 16:44:31 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:59:41 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,48 @@ Replace::~Replace()
 
 void	Replace::replace()
 {
-	std::ifstream	inputFile(this->_filename);
-	std::ofstream	outputFile(this->_filename + ".replace");
 	std::string		s1 = this->_s1;
 	std::string		s2 = this->_s2;
-	size_t			pos = 0;
 	std::string		line;
 
-	// Check if the input file is open
+	std::ifstream	inputFile(this->_filename.c_str());
     if (!inputFile.is_open()) {
 		std::cerr << "Failed to open the input file" << std::endl;
 		return ;
 	}
-	// Check if the output file is open
+	// Check if the input file is empty
+    inputFile.seekg(0, std::ios::end);
+    if (inputFile.tellg() == 0) {
+        std::cerr << "Input file is empty" << std::endl;
+        return;
+    }
+	// Reset file pointer to the beginning
+    inputFile.seekg(0, std::ios::beg);
+
+	std::ofstream	outputFile((this->_filename + ".replace").c_str());
 	if (!outputFile.is_open()) {
 		std::cerr << "Failed to create the output file" << std::endl;
 		return ;
 	}
+
 	// Read the input file and replace the string
 	while (std::getline(inputFile, line)) {
-		while ((pos = line.find(s1)) != std::string::npos && s1.length() > 0) {
+		if (!inputFile) {
+            std::cerr << "Error occurred while reading input file" << std::endl;
+            return;
+        }
+		size_t pos = 0;
+		while (s1 != s2 && (pos = line.find(s1, pos)) != std::string::npos && s1.length() > 0) {
 			line = line.substr(0, pos) + s2 + line.substr(pos + s1.length());
 			pos += s2.length();
 		}
 		outputFile << line << std::endl;
+		if (!outputFile) {
+            std::cerr << "Error occurred while writing to output file" << std::endl;
+            return;
+        }
 	}
-	// Close the files
 	inputFile.close();
 	outputFile.close();
 }
+

@@ -4,6 +4,8 @@ phonebook
 accounting
 
 *.replace
+replace_test
+empty_file
 
 level00
 level01

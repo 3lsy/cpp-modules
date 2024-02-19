@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:37:06 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/10 00:35:05 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:31:57 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 class Zombie
 {
-	public:
-		void	announce(void);
-
-		Zombie(std::string name);
-		~Zombie(void);
 	private:
 		std::string name;
+	public:
+		Zombie(std::string name);
+		~Zombie(void);
+
+		void	announce(void);
 };
 
 void randomChump( std::string name );

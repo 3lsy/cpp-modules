@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 18:13:08 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/16 16:51:38 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:46:36 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class Replace
 	public:
 		Replace(std::string filename, std::string s1, std::string s2);
 		~Replace();
+
 		void	replace();
 };
 

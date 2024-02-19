@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:31:59 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/11 16:56:35 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:43:46 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ class Weapon{
 	public:
 		Weapon(std::string type);
 		~Weapon();
+
 		const std::string &getType(void);
 		void setType(std::string type);
 };
