@@ -6,36 +6,27 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:00:12 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/06 15:30:09 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:34:47 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
+#include <cctype> // for toupper
 
-int	ft_is_lower_case(char c)
+std::string to_upper(std::string str)
 {
-	if ('a' <= c && c <= 'z')
-		return (1);
-	return (0);
+	for (size_t i = 0; i < str.length(); i++)
+		str[i] = toupper(str[i]);
+	return (str);
 }
 
 int main(int ac, char **av)
 {
 	if (ac >= 2)
 	{
-		int	i = 1;
-		while (av[i])
-		{
-			int	j = 0;
-			while (av[i][j])
-			{
-				if (ft_is_lower_case(av[i][j]))
-					av[i][j] = av[i][j] - 32;
-				std::cout << av[i][j];
-				j++;
-			}
-			i++;
-		}
+		for (int i = 1; i < ac; i++)
+			std::cout << to_upper(av[i]);
 	}
 	else if (ac == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
