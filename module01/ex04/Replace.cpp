@@ -35,15 +35,14 @@ void	Replace::replace()
 		return ;
 	}
 	// Check if the input file is empty
-    inputFile.seekg(0, std::ios::end);
-    if (inputFile.tellg() == 0) {
-        std::cerr << "Input file is empty" << std::endl;
-        return;
-    }
-	// Reset file pointer to the beginning
-    inputFile.seekg(0, std::ios::beg);
-
-	std::ofstream	outputFile((this->_filename + ".replace").c_str());
+    if (inputFile.peek() == EOF)
+	{
+		std::cout << "File is empty" << std::endl;
+		return ;
+	}
+	std::string path = this->_filename;
+	std::string filename = path.substr(path.find_last_of("/\\") + 1);
+	std::ofstream	outputFile((filename + ".replace").c_str());
 	if (!outputFile.is_open()) {
 		std::cerr << "Failed to create the output file" << std::endl;
 		return ;
