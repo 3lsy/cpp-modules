@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 22:22:51 by echavez-          #+#    #+#             */
-/*   Updated: 2024/02/29 23:43:46 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/01 00:08:18 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,55 +141,55 @@ Fixed Fixed::operator/(const Fixed &fixed) const
 //pre increment and decrement operators
 Fixed &Fixed::operator++(void)
 {
-	this->_fixedPointValue++;
+	++this->_fixedPointValue;
 	return (*this);
 }
 
 Fixed Fixed::operator++(int)
 {
 	Fixed temp(*this);
-	++(*this);
+	this->_fixedPointValue++;
 	return (temp);
 }
 
 Fixed &Fixed::operator--(void)
 {
-	this->_fixedPointValue--;
+	--this->_fixedPointValue;
 	return (*this);
 }
 
 Fixed Fixed::operator--(int)
 {
 	Fixed temp(*this);
-	--(*this);
+	this->_fixedPointValue--;
 	return (temp);
 }
 
 //min and max
 Fixed &Fixed::min(Fixed &a, Fixed &b)
 {
-	if (a.getRawBits() < b.getRawBits())
+	if (a.toFloat() <= b.toFloat())
 		return (a);
 	return (b);
 }
 
 const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
 {
-	if (a.getRawBits() < b.getRawBits())
+	if (a.toFloat() <= b.toFloat())
 		return (a);
 	return (b);
 }
 
 Fixed &Fixed::max(Fixed &a, Fixed &b)
 {
-	if (a.getRawBits() > b.getRawBits())
+	if (a.toFloat() >= b.toFloat())
 		return (a);
 	return (b);
 }
 
 const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
 {
-	if (a.getRawBits() > b.getRawBits())
+	if (a.toFloat() >= b.toFloat())
 		return (a);
 	return (b);
 }
