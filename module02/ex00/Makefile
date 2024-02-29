@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/02/16 22:22:31 by echavez-         ###   ########.fr        #
+#    Updated: 2024/02/29 23:46:53 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,16 +28,7 @@ OAUX		=	$(SRCS:%=$(DIROBJ)%)
 DEPS		=	$(OAUX:.cpp=.d)
 OBJS		=	$(OAUX:.cpp=.o)
 
-ifdef FLAGS
-	ifeq ($(FLAGS), no)
-CFLAGS		=
-	endif
-	ifeq ($(FLAGS), debug)
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -ansi -pedantic -g
-	endif
-else
 CFLAGS		=	-Wall -Wextra -Werror -std=c++98
-endif
 
 CC			=	/usr/bin/clang++
 RM			=	/bin/rm -f
