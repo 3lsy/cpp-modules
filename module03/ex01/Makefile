@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/02/29 13:34:05 by echavez-         ###   ########.fr        #
+#    Updated: 2024/03/01 18:53:00 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		=	level01
 
 DIRSRC		=	./
 
-SRC			=	main.cpp ClapTrap.cpp
+SRC			=	main.cpp ClapTrap.cpp ScavTrap.cpp
 
 SRCS		=	$(SRC)
 
