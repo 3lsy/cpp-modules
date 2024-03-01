@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:33:40 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/01 16:54:18 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/01 22:28:45 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		std::cout << "ClapTrap " << this->_name << " is already defeated!" << std::endl;
 		return ;
 	}
-	else if (this->_hitPoints <= amount || (this->_hitPoints - amount) < 0)
+	else if (this->_hitPoints <= amount)
 	{
 		std::cout << "ClapTrap " << this->_name << " has taken all the damage!" << std::endl;
 		this->_hitPoints = 0;
@@ -96,15 +96,15 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << this->_name << " can't be repaired because it's already defeated!" << std::endl;
 		return ;
 	}
-	else if (this->_hitPoints == 10)
+	else if (this->_hitPoints == MAX_HP)
 	{
 		std::cout << "ClapTrap " << this->_name << " has already full health!" << std::endl;
 		return ;
 	}
-	else if ((this->_hitPoints + amount) > 10)
+	else if ((this->_hitPoints + amount) > MAX_HP)
 	{
 		std::cout << "ClapTrap " << this->_name << " has been completely repaired!" << std::endl;
-		this->_hitPoints = 10;
+		this->_hitPoints = MAX_HP;
 		return ;
 	}
 	std::cout << "ClapTrap " << this->_name << " has been repaired for " << amount << " points!" << std::endl;

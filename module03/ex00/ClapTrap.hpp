@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:32:10 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/01 18:01:58 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/01 22:24:16 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CLAPTRAP_HPP
 
 # include <iostream>
+
+# define MAX_HP 100
 
 class ClapTrap
 {
@@ -40,6 +42,6 @@ class ClapTrap
 		unsigned int getHitPoints() const;
 		unsigned int getEnergyPoints() const;
 		unsigned int getAttackDamage() const;
-		};
+};
 
 #endif
