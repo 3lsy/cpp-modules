@@ -11,3 +11,16 @@
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+
+int main( void )
+{
+    ClapTrap clap("A");
+
+    clap.attack("B");
+    clap.takeDamage(10);
+    clap.beRepaired(5);
+    clap.attack("C");
+    clap.beRepaired(20);
+    clap.takeDamage(20);
+    return (0);
+}
