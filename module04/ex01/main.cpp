@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 02:30:53 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/02 10:52:40 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:36:59 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 
 int main()
 {
+	std::cout << "\n-----------" << std::endl;
 	std::cout << "Animal Test" << std::endl;
+	std::cout << "-----------" << std::endl;
+	
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
@@ -31,15 +34,26 @@ int main()
 	delete j;
 	delete i;
 
+	std::cout << "\n--------------" << std::endl;
+	std::cout << "Deep copy test" << std::endl;
+	std::cout << "--------------" << std::endl;
+
+	Cat basic;
+	basic.getBrain()->setIdea(0, "THIS IS MY BRAIN");
+	{
+		Cat tmp = basic;
+		std::cout << "TMP: " << tmp.getBrain()->getIdea(0) << std::endl;
+	}
+	std::cout << "BASIC: " << basic.getBrain()->getIdea(0) << std::endl;
+
+	std::cout << "\n----------------" << std::endl;
+	std::cout << "Animal list test" << std::endl;
 	std::cout << "----------------" << std::endl;
-	std::cout << "WrongAnimal Test" << std::endl;
-	const WrongAnimal* wmeta = new WrongAnimal();
-	const WrongAnimal* wi = new WrongCat();
-	std::cout << wi->getType() << " " << std::endl;
-	wi->makeSound(); //will not output the cat sound!
-	wmeta->makeSound();
-	delete wmeta;
-	delete wi;
-	
+
+    const Animal* animals[4] = { new Dog(), new Dog(), new Cat(), new Cat() };
+    for ( int i = 0; i < 4; i++ ) {
+        delete animals[i];
+    }
+
 	return 0;
 }

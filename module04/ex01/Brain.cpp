@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 10:55:17 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/02 11:00:06 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/02 16:21:52 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,14 @@ Brain &Brain::operator=(const Brain &src)
 			this->ideas[i] = src.ideas[i];
 	}
 	return *this;
+}
+
+void Brain::setIdea(int index, std::string idea)
+{
+	this->ideas[index] = idea;
+}
+
+std::string Brain::getIdea(int index) const
+{
+	return this->ideas[index];
 }

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 01:58:14 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/02 11:02:03 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/02 14:39:55 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ public:
 	Cat &operator=(const Cat &src);
 
 	void makeSound() const override;
+	//getter
+	Brain *getBrain() const;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 02:02:43 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/02 13:16:02 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:27:53 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,7 @@
 Cat::Cat() : Animal("Cat")
 {
 	std::cout << "Cat default constructor called" << std::endl;
-	try
-	{
-		this->_brain = new Brain();
-	}
-	catch(const std::bad_alloc& e)
-	{
-		std::cerr << "Memory allocation failed" << e.what() << std::endl;
-	}
+	this->_brain = new Brain();
 }
 
 Cat::~Cat()
@@ -34,6 +27,7 @@ Cat::~Cat()
 Cat::Cat(const Cat &src) : Animal(src)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
+	this->_brain = new Brain(*src._brain);
 }
 
 Cat &Cat::operator=(const Cat &src)
@@ -50,4 +44,10 @@ Cat &Cat::operator=(const Cat &src)
 void Cat::makeSound() const
 {
 	std::cout << "Meow Meow" << std::endl;
+}
+
+//getter
+Brain *Cat::getBrain() const
+{
+	return (this->_brain);
 }

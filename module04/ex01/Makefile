@@ -6,11 +6,11 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/03/02 10:42:47 by echavez-         ###   ########.fr        #
+#    Updated: 2024/03/02 14:41:38 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	level00
+NAME		=	level01
 
 
 #****************** INC *******************#
@@ -23,7 +23,7 @@ INCLUDE     =   -I $(INC)   # Header files
 
 DIRSRC		=	./
 
-SRC			=	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+SRC			=	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 
 SRCS		=	$(SRC)
 

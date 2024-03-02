@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 02:03:23 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/02 12:22:58 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:18:46 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,7 @@
 Dog::Dog() : Animal("Dog")
 {
 	std::cout << "Dog default constructor called" << std::endl;
-	try
-	{
-		this->_brain = new Brain();
-	}
-	catch(const std::bad_alloc& e)
-	{
-		std::cerr << "Memory allocation failed" << e.what() << std::endl;
-	}
+	this->_brain = new Brain();
 }
 
 Dog::~Dog()
@@ -34,6 +27,7 @@ Dog::~Dog()
 Dog::Dog(const Dog &src) : Animal(src)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
+	this->_brain = new Brain(*src._brain);
 }
 
 Dog &Dog::operator=(const Dog &src)
@@ -50,4 +44,10 @@ Dog &Dog::operator=(const Dog &src)
 void Dog::makeSound() const
 {
 	std::cout << "Woof Woof" << std::endl;
+}
+
+//getter
+Brain *Dog::getBrain() const
+{
+	return (this->_brain);
 }
