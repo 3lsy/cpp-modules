@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 02:02:43 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/02 12:25:51 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/02 13:16:02 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ Cat &Cat::operator=(const Cat &src)
 {
 	if (this != &src)
 	{
-		this->_type = src._type;
-		//*(_brain) = *(src._brain);
+		Animal::operator=(src);
+		this->_brain = new Brain(*src._brain);
 	}
 	std::cout << "Cat assignation operator called" << std::endl;
 	return (*this);
