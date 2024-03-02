@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:51:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/01 23:50:11 by ciglesia         ###   ########.fr       */
+/*   Updated: 2024/03/02 00:51:46 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ FragTrap::~FragTrap()
 FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 {
 	std::cout << "FragTrap Copy constructor called" << std::endl;
-	// this->_name = src._name;
-	// this->_hitPoints = src._hitPoints;
-	// this->_energyPoints = src._energyPoints;
-	// this->_attackDamage = src._attackDamage;
 }
 
 FragTrap &FragTrap::operator=(FragTrap const &src)
@@ -49,10 +45,6 @@ FragTrap &FragTrap::operator=(FragTrap const &src)
 	if (this != &src)
 	{
 		ClapTrap::operator=(src);
-		// this->_name = src._name;
-		// this->_hitPoints = src._hitPoints;
-		// this->_energyPoints = src._energyPoints;
-		// this->_attackDamage = src._attackDamage;
 	}
 	std::cout << "FragTrap Assignation operator called" << std::endl;
 	return (*this);
@@ -71,4 +63,5 @@ void FragTrap::highFivesGuys(void)
         return ;
     }
     std::cout << "FragTrap " << this->_name << " is asking for a high five!" << std::endl;
+	this->_energyPoints--;
 }

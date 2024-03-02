@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:51:48 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/01 23:48:06 by ciglesia         ###   ########.fr       */
+/*   Updated: 2024/03/02 00:30:50 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ ScavTrap::~ScavTrap()
 ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src)
 {
 	std::cout << "ScavTrap Copy constructor called" << std::endl;
-	// this->_name = src._name;
-	// this->_hitPoints = src._hitPoints;
-	// this->_energyPoints = src._energyPoints;
-	// this->_attackDamage = src._attackDamage;
 }
 
 ScavTrap &ScavTrap::operator=(ScavTrap const &src)
@@ -49,10 +45,6 @@ ScavTrap &ScavTrap::operator=(ScavTrap const &src)
 	if (this != &src)
 	{
 		ClapTrap::operator=(src);
-		// this->_name = src._name;
-		// this->_hitPoints = src._hitPoints;
-		// this->_energyPoints = src._energyPoints;
-		// this->_attackDamage = src._attackDamage;
 	}
 	std::cout << "ScavTrap Assignation operator called" << std::endl;
 	return (*this);
@@ -76,5 +68,16 @@ void ScavTrap::attack(std::string const &target)
 
 void ScavTrap::guardGate()
 {
+	if (this->_energyPoints <= 0)
+	{
+		std::cout << "ScavTrap " << this->_name << " has no energy points to guard the gate!" << std::endl;
+		return ;
+	}
+	else if (this->_hitPoints <= 0)
+	{
+		std::cout << "ScavTrap " << this->_name << " has no health to guard the gate!" << std::endl;
+		return ;
+	}
 	std::cout << "ScavTrap " << this->_name << " has entered in Gate keeper mode" << std::endl;
+	this->_energyPoints--;
 }
