@@ -6,7 +6,7 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/03/02 01:48:34 by echavez-         ###   ########.fr        #
+#    Updated: 2024/03/02 02:36:23 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		=	level00
 
 #****************** INC *******************#
 # General
-INC         =   ./include/                  # Project header files drectory
+INC         =   ./                         # Project header files drectory
 
 INCLUDE     =   -I $(INC)   # Header files
 
@@ -23,7 +23,7 @@ INCLUDE     =   -I $(INC)   # Header files
 
 DIRSRC		=	./
 
-SRC			=	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+SRC			=	main.cpp Animal.cpp Dog.cpp Cat.cpp #WrongAnimal.cpp WrongCat.cpp
 
 SRCS		=	$(SRC)
 
@@ -44,12 +44,12 @@ ECHO		=	/bin/echo -e
 #************************ DEPS COMPILATION *************************
 
 %.o		:		../$(DIRSRC)/%.cpp
-				@$(CC)  $(INCLUDE) $(CFLAGS) -MMD -o $@ -c $<
+				@$(CC) $(INCLUDE) $(CFLAGS) -MMD -o $@ -c $<
 
 #************************ MAIN COMPILATION *************************
 
 $(NAME)	:		$(OBJS)
-				@$(CC)  $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS)
+				@$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean	:
 				@($(RM) $(OBJS))
