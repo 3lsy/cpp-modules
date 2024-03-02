@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 02:30:53 by echavez-          #+#    #+#             */
-/*   Updated: 2024/03/02 19:09:17 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/03/02 19:22:40 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main()
 	std::cout << "-----------" << std::endl;
 	
 	// const AAnimal* meta = new AAnimal();
+	// AAnimal test;
 	const AAnimal* j = new Dog();
 	const AAnimal* i = new Cat();
 	std::cout << j->getType() << " " << std::endl;
