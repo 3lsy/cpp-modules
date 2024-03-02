@@ -39,7 +39,10 @@ Dog::Dog(const Dog &src) : Animal(src)
 Dog &Dog::operator=(const Dog &src)
 {
 	if (this != &src)
+	{
 		Animal::operator=(src);
+		this->_brain = new Brain(*src._brain);
+	}
 	std::cout << "Dog assignation operator called" << std::endl;
 	return (*this);
 }
