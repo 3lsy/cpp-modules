@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:52:43 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/29 00:24:24 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:28:13 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ Bureaucrat::~Bureaucrat() {
 	std::cout << "Bureaucrat " << _name << " has been destroyed" << std::endl;
 }
 
-int Bureaucrat::getGrade() const {
-	return _grade;
-}
-
 std::string Bureaucrat::getName() const {
 	return _name;
+}
+
+int Bureaucrat::getGrade() const {
+	return _grade;
 }
 
 void Bureaucrat::setGrade(int grade) {
