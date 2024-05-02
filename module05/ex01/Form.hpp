@@ -6,15 +6,16 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:31:44 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/29 18:10:59 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:15:49 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORM_HPP
 # define FORM_HPP
 
-# include <iostream>
+# include "Bureaucrat.hpp"
 
+class Bureaucrat;
 class Form {
 	private:
 		const std::string _name;
@@ -27,6 +28,15 @@ class Form {
 		Form(const Form &form);
 		~Form();
 		Form &operator=(const Form &form);
+		
+		//getters
+		std::string getName() const;
+		bool getSigned() const;
+		int getGradeToSign() const;
+		int getGradeToExecute() const;
+
+		void beSigned(const Bureaucrat &bureaucrat);
+		void signForm(const Bureaucrat &bureaucrat);
 		
 		class GradeTooHighException : public std::exception {
 			public:

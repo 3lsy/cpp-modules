@@ -6,17 +6,17 @@
 #    By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/06 09:39:46 by echavez-          #+#    #+#              #
-#    Updated: 2024/04/29 00:19:52 by echavez-         ###   ########.fr        #
+#    Updated: 2024/05/02 13:36:25 by echavez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	level00
+NAME		=	level01
 
 #***************** SRC* *******************#
 
 DIRSRC		=	./
 
-SRC			=	main.cpp Bureaucrat.cpp
+SRC			=	main.cpp Bureaucrat.cpp Form.cpp
 
 SRCS		=	$(SRC)
 
