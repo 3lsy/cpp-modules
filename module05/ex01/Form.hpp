@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:31:44 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/02 13:15:49 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:16:33 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "Bureaucrat.hpp"
 
 class Bureaucrat;
+
 class Form {
 	private:
 		const std::string _name;
