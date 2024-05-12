@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:26:13 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/02 14:00:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:12:37 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ bool Form::getSigned() const {
 	return _signed;
 }
 
+void Form::setSigned(bool isSigned) {
+	_signed = isSigned;
+}
+
 int Form::getGradeToSign() const {
 	return _gradeToSign;
 }
@@ -52,16 +56,8 @@ int Form::getGradeToExecute() const {
 void Form::beSigned(const Bureaucrat &bureaucrat) {
 	if (bureaucrat.getGrade() > _gradeToSign)
 		throw Form::GradeTooLowException();
-	_signed = true;
-}
-
-void Form::signForm(const Bureaucrat &bureaucrat) {
-	try {
-		beSigned(bureaucrat);
-		std::cout << bureaucrat.getName() << " signed " << _name << std::endl;
-	} catch (std::exception &e) {
-		std::cout << bureaucrat.getName() << " cannot sign " << _name << " because " << e.what() << std::endl;
-	}
+	else
+		setSigned(true);
 }
 
 std::ostream &operator<<(std::ostream &out, const Form &form) {

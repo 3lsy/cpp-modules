@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:50:49 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/02 13:59:28 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:35:42 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int main() {
 	// Test creating forms with valid and invalid grades
+	std::cout << "----FORMS WITH VALID & INVALID GRADES----" << std::endl;
+	std::cout << std::endl;
     try {
-        Form defaultForm;  // Default constructor, valid
+        Form defaultForm;
         std::cout << defaultForm << std::endl;
 
         Form highGradeForm("TopSecret", 1, 1);
@@ -25,50 +27,57 @@ int main() {
         std::cout << lowGradeForm << std::endl;
 
         Form invalidForm("Invalid", 0, 150);
-    } catch (const Form::GradeTooHighException& e) {
-        std::cerr << "Form creation failed: " << e.what() << std::endl;
-    } catch (const Form::GradeTooLowException& e) {
-        std::cerr << "Form creation failed: " << e.what() << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Unexpected error: " << e.what() << std::endl;
     }
 
-    // Test signing forms with Bureaucrats
+	std::cout << std::endl << "----SIGN FORM TESTS----" << std::endl;
+	std::cout << std::endl;
+
+    // Create two bureaucrats with different grades and names
+    Bureaucrat bob("Bob", 1);
+    Bureaucrat alice("Alice", 150);
+
+    // Print out initial bureaucrat info
+    std::cout << "Initial Bob: ";
+    std::cout << bob;
+
+    std::cout << "Initial Alice: ";
+    std::cout << alice;
+    std::cout << std::endl;
+
+    // Create a form with a specific grade requirement for signing
+    Form salesContract("Sales Contract", 120, 150);
+
+    // Bob should be able to sign the form
     try {
-        Bureaucrat chief("Chief", 5);
-        Bureaucrat assistant("Assistant", 100);
-
-        Form report("Quarterly Report", 10, 50);
-
-        std::cout << report << std::endl;
-
-        report.signForm(chief);  // Should work
-        std::cout << report << std::endl;
-
-        report.signForm(assistant);  // Should fail because assistant's grade is too low
-    } catch (const Bureaucrat::GradeTooHighException& e) {
-        std::cerr << "Bureaucrat error: " << e.what() << std::endl;
-    } catch (const Bureaucrat::GradeTooLowException& e) {
-        std::cerr << "Bureaucrat error: " << e.what() << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Unexpected error: " << e.what() << std::endl;
+        bob.signForm(salesContract);
+    } catch (const std::exception &e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
 
-	// Test the copy constructor
+    // Alice shouldn't be able to sign the form because her grade is too low
+    try {
+        alice.signForm(salesContract);
+    } catch (const std::exception &e) {
+        std::cout << "Error: " << e.what() << std::endl;
+    }
+
+	// Increment Alice's grade so she can sign the form
+	std::cout << "Incrementing Alice's grade..." << std::endl;
+	while (alice.getGrade() >= salesContract.getGradeToSign()) {
+		alice.incrementGrade();
+	}
+
+	// Alice should now be able to sign the form
 	try {
-        Form form1("Form A", 100, 120);
-        Bureaucrat chief("Chief", 5);
+		alice.signForm(salesContract);
+	} catch (const std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
 
-        form1.signForm(chief);
-        
-        std::cout << form1 << std::endl;
-
-        Form formCopy(form1);
-        std::cout << "Copy of Form A:" << std::endl;
-        std::cout << formCopy << std::endl;
-
-    } catch (const std::exception& e) {
-        std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
-    }
+	//show the status of the form
+	std::cout << salesContract << std::endl;
     return 0;
 }
