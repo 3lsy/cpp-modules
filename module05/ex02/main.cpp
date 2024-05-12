@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:50:49 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/12 19:51:35 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/05/12 20:43:52 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int main() {
     }
     catch(const std::exception& e)
     {
-		std::cerr << "Error: " << e.what() << '\n';
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
     return (0);
