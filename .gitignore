@@ -6,6 +6,7 @@ accounting
 *.replace
 replace_test
 empty_file
+test_shrubbery
 
 level00
 level01
