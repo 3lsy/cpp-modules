@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:26:13 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/12 16:12:37 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:59:21 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name),
 }
 
 Form::Form(const Form &form) : _name(form._name), _signed(form._signed), _gradeToSign(form._gradeToSign), _gradeToExecute(form._gradeToExecute) {
+}
+
+Form &Form::operator=(const Form &form) {
+	if (this != &form) {
+		_signed = form._signed;
+	}
+	return *this;
 }
 
 Form::~Form() {
