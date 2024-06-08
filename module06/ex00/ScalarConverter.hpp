@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:41:31 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/15 16:27:08 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/08 13:34:55 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <string>
 # include <climits>  // for INT_MAX and INT_MIN
 
+# define NUMBER 1
+# define CHAR 2
+# define SPECIAL 3
+
 class ScalarConverter {
 	private:
 		ScalarConverter();
@@ -28,25 +32,12 @@ class ScalarConverter {
 		static void convert(std::string str);
 };
 
-//functions to convert
-void toChar(std::string str);
-void toInt(std::string str);
-void toFloat(std::string str);
-void toDouble(std::string str);
-//is digit
-bool isDigit(char c);
+int	getInputType(std::string str);
+void convertFromNumber(std::string str, int inputType);
+void convertFromChar(std::string str);
 //is printable
 bool isPrintable(char c);
-//is special
-bool isSpecial(std::string str);
 //calculate length
 int strLength(std::string str);
-//verification of the input string
-int isChar(std::string str);
-int isInt(std::string str);
-int isFloat(std::string str);
-int isDouble(std::string str);
-
-std::ostream & operator<<(std::ostream & o, ScalarConverter const & src);
 
 #endif

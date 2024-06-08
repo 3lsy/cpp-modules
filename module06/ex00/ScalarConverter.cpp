@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:41:17 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/15 16:39:10 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/08 13:30:29 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,151 +25,136 @@ ScalarConverter & ScalarConverter::operator=(ScalarConverter const & src) {
 	return *this;
 }
 
+// inputType = {1: number, 2: char, 3: special}
 void ScalarConverter::convert(std::string str){
-	/*
-	if (str == "0" || str == "0.0" || str == "+0.0" || str == "-0.0")
-		std::cout << "char: '0'" << std::endl;
-	else if (str == "nan" || str == "-inff" || str == "+inff" || str == "-inf"
-	|| str == "+inf" || str == "nanf")
-		std::cout << "char: impossible" << std::endl;
-	else {
-		toChar(str);
-		toInt(str);
-		toFloat(str);
-		toDouble(str);
+	int 	i;
+	double	d;
+	float	f;
+	char	c;
+	int		inputType;
+	
+	inputType = getInputType(str);
+	if (inputType == NUMBER || inputType == SPECIAL) {
+		convertFromNumber(str, inputType);
 	}
-	*/
-	toChar(str);
-	toInt(str);
+	else if (inputType == CHAR) {
+		convertFromChar(str);
+	}
 }
 
-//functions to convert: check if the string is a char, then print it, using static_cast
-void toChar(std::string str){
-	if (isChar(str) == 3)
-		std::cout << "char: '*'" << std::endl;
-	else if (isChar(str) == 2)
-		std::cout << "char: Non displayable" << std::endl;
-	else if (isChar(str) == 1) {
-		char c = static_cast<char>(str[0]); //convert string to char
-		std::cout << "char: '" << c << "'" << std::endl;
+// inputType = {1: number, 2: char, 3: special}
+int	getInputType(std::string str) {
+	try {
+		int i = std::stoi(str);
+		return (NUMBER);
 	}
-	else
-		std::cout << "char: impossible" << std::endl;
+	catch (std::exception & e) {
+		if (strLength(str) == 1)
+			return (CHAR);
+		else
+			return (SPECIAL);
+	}
 }
 
-void toInt(std::string str){
-	if (isFloat(str)) {
-		//
+void	convertFromNumber(std::string str, int inputType) {
+	int 	i;
+	double	d;
+	float	f;
+	char	c;
+	try {
+		i = static_cast<int>(std::stoi(str));
+		c = static_cast<char>(i);
+		if (isPrintable(c)) {
+			std::cout << "char: " << c << std::endl;
+		}
+		else {
+			std::cout << "char: Non displayable" << std::endl;
+		}
+		std::cout << "int: " << i << std::endl;
 	}
-	char* endptr;
-    long n = std::strtol(str.c_str(), &endptr, 10);
-
-    if (n > INT_MAX || n < INT_MIN) {
-        std::cout << "int: overflow or underflow" << std::endl;
-    } else if (isInt(str)) {
-        int intValue = static_cast<int>(n);
-        std::cout << "int: " << intValue << std::endl;
-    }
-	else
+	catch (std::exception & e) {
+		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
+	}
+	try {
+		if (inputType != SPECIAL) {
+			f = static_cast<float>(std::stof(str));
+			int intPartF = static_cast<int>(f);
+			if (f - intPartF == 0)
+				std::cout << "float: " << f << ".0f" << std::endl;
+			else
+				std::cout << "float: " << f << "f" << std::endl;
+
+			d = static_cast<double>(std::stod(str));
+			int intPartD = static_cast<int>(d);
+			if (d - intPartD == 0)
+				std::cout << "double: " << d << ".0" << std::endl;
+			else
+				std::cout << "double: " << d << std::endl;
+
+		}
+		else {
+			//nanf, -inff, +inff
+			if (str == "nan" || str == "nanf") {
+				std::cout << "float: nanf" << std::endl;
+				std::cout << "double: nan" << std::endl;
+			}
+			else if (str == "-inf" || str == "-inff") {
+				std::cout << "float: -inff" << std::endl;
+				std::cout << "double: -inf" << std::endl;
+			}
+			else if (str == "+inf" || str == "+inff") {
+				std::cout << "float: +inff" << std::endl;
+				std::cout << "double: +inf" << std::endl;
+			}
+			else
+				throw std::exception();
+		}
+	}
+	catch (std::exception & e) {
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+	}
+
 }
 
+void	convertFromChar(std::string str) {
+	int 	i;
+	double	d;
+	float	f;
+	char	c;
 
+	c = str[0];
+	i = static_cast<int>(c);
+	f = static_cast<float>(c);
+	d = static_cast<double>(c);
+	std::cout << "char: " << c << std::endl;
+	std::cout << "int: " << i << std::endl;
+	f = static_cast<float>(c);
+	int intPartF = static_cast<int>(f);
+	if (f - intPartF == 0)
+		std::cout << "float: " << f << ".0f" << std::endl;
+	else
+		std::cout << "float: " << f << "f" << std::endl;
 
-//is digit
-bool isDigit(char c){
-	if (c >= '0' && c <= '9')
-		return true;
-	return false;
+	d = static_cast<double>(c);
+	int intPartD = static_cast<int>(d);
+	if (d - intPartD == 0)
+		std::cout << "double: " << d << ".0" << std::endl;
+	else
+		std::cout << "double: " << d << std::endl;
+
 }
 
-//is printable
 bool isPrintable(char c){
 	if (c >= 32 && c <= 126)
 		return true;
 	return false;
 }
 
-//is special
-bool isSpecial(std::string str){
-	if (str == "nanf" || str == "-inff" || str == "+inff" || str == "-inf"
-	|| str == "+inf" || str == "nan")
-		return true;
-	return false;
-}
-
-//calculate length
 int strLength(std::string str){
 	int i = 0;
 	while (str[i])
 		i++;
 	return i;
-}
-
-//verifications of the input string
-int isChar(std::string str){
-	if (strLength(str) == 1){
-		if (!isDigit(str[0]) && isPrintable(str[0]))
-			return (1);
-		else if (!isPrintable(str[0]) || str[0] == '0')
-			return (2);
-	}
-	else if (isFloat(str))
-		return (3);
-	return (0);
-}
-/*
-//old version
-int isChar(std::string str){
-	if (str.length() == 1) {
-		char c = static_cast<char>(str[0]); //convert string to char
-		if (!isDigit(c) && isPrintable(c))
-			return (1);
-		else if (!isPrintable(c) || str[0] == '0')
-			return (2);
-		else if (isFloat(str))
-			return (3);
-	}
-	return (0);
-}
-*/
-
-//verify if the string is an int. Format: [+-]d+
-int isInt(std::string str){
-	int i = 0;
-	int len = strLength(str);
-	int digit = 0;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	while (str[i]) {
-		if (!isDigit(str[i]))
-			return (0);
-		else
-			digit++;
-		i++;
-	}
-	return (1);
-}
-
-//verify if the string is a float. Format: d+.d+f
-int isFloat(std::string str){
-	int i = 0;
-	int dot = 0;
-	int dotIndex = 0;
-	int f = 0;
-	int len = strLength(str);
-	while (str[i]) {
-		if (str[i] == '.') {
-			dotIndex = i;
-			dot++;
-		}
-		else if (str[i] == 'f')
-			f++;
-		i++;
-	}
-	if (dot == 1 && f == 1 && isDigit(str[len - 2])
-		&& isDigit(str[dotIndex - 1]) && isDigit(str[dotIndex + 1])
-		&& str[len - 1] == 'f')
-		return (1);
-	return (0);
 }
