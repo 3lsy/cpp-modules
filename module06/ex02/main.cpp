@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 11:16:51 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/09 11:49:10 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:12:55 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Base* generate() {
         case 1: return new B();
         case 2: return new C();
     }
-    return nullptr;
+    return (NULL);
 }
 
 void identify(Base* p) {
