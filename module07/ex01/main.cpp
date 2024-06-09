@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:05:49 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/09 13:22:45 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:22:48 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ int main() {
     size_t doubleLength = sizeof(doubleArray) / sizeof(doubleArray[0]);
 
     // Test with int array and print function
-    std::cout << "Int array: ";
+    std::cout << "Int array: " << std::endl;
     iter(intArray, intLength, printElement<int>);
     std::cout << std::endl;
 
     // Test with double array and print function
-    std::cout << "Double array: ";
+    std::cout << "Double array: " << std::endl;
     iter(doubleArray, doubleLength, printElement<double>);
-    std::cout << std::endl;
 
     return 0;
 }

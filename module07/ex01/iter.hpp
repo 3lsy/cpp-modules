@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:05:18 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/09 13:22:19 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:22:10 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void iter(T* array, size_t length, void (*func)(const T&)) {
 
 template<typename T>
 void printElement(const T& x) {
-    std::cout << x << " ";
+    std::cout << x << std::endl;
 }
 
 #endif
