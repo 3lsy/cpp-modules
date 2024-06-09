@@ -2,7 +2,6 @@
 #include <ctime>
 #include "Array.hpp"
 
-/*
 #define MAX_VAL 750
 int main(int, char**)
 {
@@ -53,8 +52,8 @@ int main(int, char**)
     delete [] mirror;//
     return 0;
 }
-*/
 
+/*
 #define MAX_VAL 10
 
 int main() {
@@ -114,16 +113,14 @@ int main() {
         }
 		std::cout << "\n" << std::endl;
 
-		/*
 		// Try to write into constNumbers
-		std::cout << "Trying to write into constNumbers..." << std::endl;
-		try {
-			constNumbers[0] = 5; // Try to write into constNumbers, should result in an error
-		} catch(const std::exception& e) {
-			std::cerr << "Exception caught: " << e.what() << std::endl;
-		}
-		std::cout << "\n" << std::endl;
-		*/
+		// std::cout << "Trying to write into constNumbers..." << std::endl;
+		// try {
+		// 	constNumbers[0] = 5; // Try to write into constNumbers, should result in an error
+		// } catch(const std::exception& e) {
+		// 	std::cerr << "Exception caught: " << e.what() << std::endl;
+		// }
+		// std::cout << "\n" << std::endl;
 
 		// Test out-of-bounds access
 		std::cout << "Out-of-bounds access test (numbers3[MAX_VAL]):" << std::endl;
@@ -150,3 +147,5 @@ int main() {
 
 	return 0;
 }
+
+*/
