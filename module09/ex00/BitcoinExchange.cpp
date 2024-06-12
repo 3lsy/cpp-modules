@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:31:53 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/12 11:58:47 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:32:55 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,30 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
 			continue;
 		}
 		if (!std::isdigit(date[i])) {
+			return false;
+		}
+	}
+	//check with stoi that the date is valid
+	int year = std::stoi(date.substr(0, 4));
+	int month = std::stoi(date.substr(5, 2));
+	int day = std::stoi(date.substr(8, 2));
+	if (year < 2009 || year > 2024 || month < 1 || month > 12 || day < 1 || day > 31) {
+		return false;
+	}
+	//if february
+	if (month == 2) {
+		if (day > 29) {
+			return false;
+		}
+		if (day == 29) {
+			if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
+				return false;
+			}
+		}
+	}
+	//if month has 30 days
+	if (month == 4 || month == 6 || month == 9 || month == 11) {
+		if (day == 31) {
 			return false;
 		}
 	}
