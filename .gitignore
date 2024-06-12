@@ -3,6 +3,7 @@ megaphone
 phonebook
 accounting
 btc
+RPN
 
 *.replace
 replace_test
