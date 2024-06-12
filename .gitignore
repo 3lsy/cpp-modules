@@ -2,6 +2,7 @@
 megaphone
 phonebook
 accounting
+btc
 
 *.replace
 replace_test
