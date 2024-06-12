@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:31:53 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/11 22:55:58 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:58:47 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ void BitcoinExchange::processInput(const std::string& filename) {
 		float value;
 		char separator;
 		if (stream >> date >> separator >> value) {
-			//check date format
-			if (date.size() != 10 || date[4] != '-' || date[7] != '-') {
-				std::cerr << "Error: bad date format => " << date << std::endl;
+			if (!isValidDate(date)) {
+				std::cerr << "Error: bad date => " << date << std::endl;
 				continue;
 			}
-			auto it = database.lower_bound(date);
+			std::map<std::string, float>::iterator it = database.lower_bound(date);
 			if (it == database.end() || it->first != date) {
 				if (it != database.begin()) {
 					--it;
@@ -68,16 +67,31 @@ void BitcoinExchange::processInput(const std::string& filename) {
 			}
 			if (it != database.end()) {
 				if (value < 0)
-					std::cout << "Error: not a positive number." << std::endl;
+					std::cerr << "Error: not a positive number." << std::endl;
 				else if (value > 1000)
-					std::cout << "Error: too large number." << std::endl;
+					std::cerr << "Error: too large number." << std::endl;
 				else
-					std::cout << date << " => " << value << " = " << value * it->second << "\n";
+					std::cout << date << " => " << value << " = " << value * it->second << std::endl;
 			} else {
-				std::cout << "Error: date not found in database\n";
+				std::cerr << "Error: date not found in database" << std::endl;
 			}
 		} else {
-			std::cout << "Error: bad input => " << line << "\n";
+			std::cerr << "Error: bad input => " << line << std::endl;
 		}
     }
+}
+
+bool BitcoinExchange::isValidDate(const std::string& date) {
+	if (date.size() != 10 || date[4] != '-' || date[7] != '-') {
+		return false;
+	}
+	for (size_t i = 0; i < date.size(); i++) {
+		if (i == 4 || i == 7) {
+			continue;
+		}
+		if (!std::isdigit(date[i])) {
+			return false;
+		}
+	}
+	return true;
 }

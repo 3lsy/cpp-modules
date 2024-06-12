@@ -6,34 +6,25 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:32:04 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/11 22:53:22 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:02:43 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BITCOINEXCHANGE_HPP
 # define BITCOINEXCHANGE_HPP
 
-// # include <iostream>
-// # include <fstream>
-// # include <sstream>
-// # include <map>
-// # include <string>
-// # include <algorithm>
-
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <map>
-#include <string>
-#include <iomanip>
-#include <limits>
-#include <cerrno>
+#include <fstream> //ifstream
+#include <sstream> //istringstream
+#include <map> //map
+#include <string> //string
 
 #define DB "data.csv"
 
 class BitcoinExchange {
 	private:
 		std::map<std::string, float> database;
+		bool isValidDate(const std::string& date);
 	public:
 		BitcoinExchange(void);
 		BitcoinExchange(BitcoinExchange const & src);
