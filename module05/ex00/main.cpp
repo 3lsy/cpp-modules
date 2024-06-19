@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:50:49 by echavez-          #+#    #+#             */
-/*   Updated: 2024/04/29 00:31:12 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:26:01 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main() {
         Bureaucrat b3("Bob", 150);
         std::cout << b3;
 
+		std::cout << "Incrementing grade of " << b2.getName() << std::endl;
         b2.incrementGrade();
     } catch (const Bureaucrat::GradeTooHighException& e) {
         std::cerr << "Caught exception: " << e.what() << std::endl;
@@ -31,6 +32,8 @@ int main() {
     } catch (const std::exception& e) {
         std::cerr << "Unexpected exception: " << e.what() << std::endl;
     }
+
+	std::cout << std::endl;
 
     try {
         Bureaucrat b4("Charlie", 151);
@@ -41,6 +44,8 @@ int main() {
     } catch (const std::exception& e) {
         std::cerr << "Unexpected exception: " << e.what() << std::endl;
     }
+
+	std::cout << std::endl;
 
     try {
         Bureaucrat b3("Diana", 2);
