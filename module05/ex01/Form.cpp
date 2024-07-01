@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:26:13 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/12 17:59:21 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 12:53:50 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,13 @@ std::ostream &operator<<(std::ostream &out, const Form &form) {
 	else
 		out << "not signed" << std::endl;
 	return out;
+}
+
+//exception functions
+const char *Form::GradeTooHighException::what() const throw() {
+	return "Grade is too high";
+}
+
+const char *Form::GradeTooLowException::what() const throw() {
+	return "Grade is too low";
 }

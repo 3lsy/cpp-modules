@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:52:43 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/10 00:31:57 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 12:51:18 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,19 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 	setGrade(_grade);
 }
 
+Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) : _name(bureaucrat._name), _grade(bureaucrat._grade) {
+	setGrade(_grade);
+}
+
 Bureaucrat::~Bureaucrat() {
 	std::cout << "Bureaucrat " << _name << " has been destroyed" << std::endl;
+}
+
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &bureaucrat) {
+	if (this != &bureaucrat) {
+		_grade = bureaucrat._grade;
+	}
+	return *this;
 }
 
 std::string Bureaucrat::getName() const {
@@ -60,4 +71,13 @@ void Bureaucrat::signForm(Form &form) const {
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat) {
 	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << std::endl;
 	return out;
+}
+
+//exceptions
+const char *Bureaucrat::GradeTooHighException::what() const throw() {
+	return "Grade is too high";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw() {
+	return "Grade is too low";
 }
