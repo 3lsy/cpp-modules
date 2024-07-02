@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:50:49 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/12 20:43:52 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/07/02 13:21:31 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main() {
 
 		std::cout << std::endl << "----EXECUTING FORM WHEN REQUISITES ARE NOT OK----" << std::endl;
 		std::cout << std::endl;
-		bureaucrat->setGrade(150);
+		bureaucrat->setGrade(137);
 		std::cout << "Setting bureaucrat grade to the lowest..." << std::endl;
 		std::cout << *bureaucrat << std::endl;
 		std::cout <<  "---PresidentPardonForm---" <<std::endl;

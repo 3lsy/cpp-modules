@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 20:52:46 by echavez-          #+#    #+#             */
-/*   Updated: 2024/05/12 16:49:48 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/07/01 12:57:47 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,11 @@ class Bureaucrat {
 		// Custom exceptions
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char *what() const throw() {
-					return "Grade is too high";
-				}
+				virtual const char *what() const throw();
 		};
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char *what() const throw() {
-					return "Grade is too low";
-				}
+				virtual const char *what() const throw();
 		};
 };
 
