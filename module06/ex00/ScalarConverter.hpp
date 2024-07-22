@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:41:31 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/08 13:34:55 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:03:32 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <cstdlib> //to convert string to int, float, double
 # include <string>
 # include <climits>  // for INT_MAX and INT_MIN
+#include <sstream>
 
 # define NUMBER 1
 # define CHAR 2
