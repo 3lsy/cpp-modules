@@ -72,7 +72,7 @@ int main() {
 		std::cout << "numbers.size() = " << numbers.size();
 		std::cout << "\n" << std::endl;
 
-		std::cout << "MAX_VALL =" << MAX_VAL << std::endl;
+		std::cout << "MAX_VAL =" << MAX_VAL << std::endl;
 		// Test constructor with size and operator[]
 		Array<int> numbers2(MAX_VAL);
 		std::cout << "Constructor with size test (number2.size = MAX_VAL):" << std::endl;
@@ -147,5 +147,4 @@ int main() {
 
 	return 0;
 }
-
 */
