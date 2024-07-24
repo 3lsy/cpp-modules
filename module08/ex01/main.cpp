@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 10:54:59 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/10 12:55:35 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/07/24 11:58:30 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int main() {
     } catch (const std::exception &e) {
         std::cerr << "Unexpected error: " << e.what() << std::endl;
     }
+	std::cout << std::endl;
 
 	std::cout << "----- EXCEPTION TEST -----" << std::endl;
 
@@ -42,10 +43,12 @@ int main() {
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
+		// This should throw an exception
 		sp.addNumber(11);
 	} catch (const std::exception &e) {
 		std::cerr << "Unexpected error: " << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
 	std::cout << "----- SUBJECT TEST -----" << std::endl;
 
