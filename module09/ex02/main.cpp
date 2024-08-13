@@ -6,14 +6,12 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:53:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/07/24 16:44:17 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:54:46 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-
-/*
 int main(int argc, char** argv) {
     if (argc < 2) {
         std::cerr << "Error: invalid number of arguments\n";
@@ -39,9 +37,9 @@ int main(int argc, char** argv) {
     sorter.sort(input);
     return 0;
 }
-*/
 
-
+/*
+//main to test 3000 elements
 int main(int argc, char** argv) {
     // Seed the random number generator
     std::srand(static_cast<unsigned>(std::time(0)));
@@ -56,3 +54,4 @@ int main(int argc, char** argv) {
     sorter.sort(input);
     return 0;
 }
+*/
