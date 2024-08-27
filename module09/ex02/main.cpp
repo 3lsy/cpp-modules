@@ -6,35 +6,86 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:53:11 by echavez-          #+#    #+#             */
-/*   Updated: 2024/08/13 14:54:46 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:29:54 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+// Function to check for duplicates in a vector
+bool hasDuplicates(const std::vector<int>& input) {
+    std::set<int> uniqueElements;
+    for (size_t i = 0; i < input.size(); ++i) {
+        if (uniqueElements.find(input[i]) != uniqueElements.end()) {
+            return true;
+        }
+        uniqueElements.insert(input[i]);
+    }
+    return false;
+}
+
+// Function to check for duplicates in a list
+bool hasDuplicates(const std::list<int>& input) {
+    std::set<int> uniqueElements;
+    for (std::list<int>::const_iterator it = input.begin(); it != input.end(); ++it) {
+        if (uniqueElements.find(*it) != uniqueElements.end()) {
+            return true;
+        }
+        uniqueElements.insert(*it);
+    }
+    return false;
+}
+
 int main(int argc, char** argv) {
     if (argc < 2) {
-        std::cerr << "Error: invalid number of arguments\n";
+        std::cerr << "Error: No input provided." << std::endl;
         return 1;
     }
 
-    std::vector<int> input;
+    std::vector<int> vecInput;
+    std::list<int> listInput;
+
     for (int i = 1; i < argc; ++i) {
-        try {
-            int value = std::stoi(argv[i]);
-            if (value < 0) {
-                std::cerr << "Error: negative values are not allowed\n";
-                return 1;
-            }
-            input.push_back(value);
-        } catch (...) {
-            std::cerr << "Error: invalid input\n";
+        int num = std::atoi(argv[i]);
+        if (num <= 0) {
+            std::cerr << "Error: All inputs must be positive integers." << std::endl;
             return 1;
         }
+        vecInput.push_back(num);
+        listInput.push_back(num);
+    }
+    if (hasDuplicates(vecInput)) {
+        std::cerr << "Error: Duplicate elements detected in input." << std::endl;
+        return 1;
     }
 
-    PmergeMe sorter;
-    sorter.sort(input);
+    std::cout << "Before: ";
+    for (size_t i = 0; i < vecInput.size(); ++i) {
+        std::cout << vecInput[i] << " ";
+    }
+    std::cout << std::endl;
+
+	PmergeMe sorter;
+    clock_t startVec = std::clock();
+    sorter.mergeInsertSort(vecInput);
+    clock_t endVec = std::clock();
+
+    clock_t startList = std::clock();
+    sorter.mergeInsertSort(listInput);
+    clock_t endList = std::clock();
+
+    std::cout << "After: ";
+    for (size_t i = 0; i < vecInput.size(); ++i) {
+        std::cout << vecInput[i] << " ";
+    }
+    std::cout << std::endl;
+
+    double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1e6;
+    double timeList = static_cast<double>(endList - startList) / CLOCKS_PER_SEC * 1e6;
+
+    std::cout << "Time to process a range of " << vecInput.size() << " elements with std::vector: " << timeVec << " us" << std::endl;
+    std::cout << "Time to process a range of " << listInput.size() << " elements with std::list: " << timeList << " us" << std::endl;
+
     return 0;
 }
 

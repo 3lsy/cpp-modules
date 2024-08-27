@@ -6,50 +6,37 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:54:25 by echavez-          #+#    #+#             */
-/*   Updated: 2024/07/24 16:10:34 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:28:59 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
-#include <iostream>
-#include <vector>
-#include <list>
-#include <algorithm>
-#include <ctime>
+# include <iostream>
+# include <vector>
+# include <deque>
+# include <list>
+# include <algorithm>
+# include <ctime>
+# include <iterator>
+# include <set>
+# include <cstdlib>
 
 class PmergeMe {
-public:
-    void sort(const std::vector<int>& input);
-
-private:
-    static const size_t INSERTION_SORT_THRESHOLD = 10;
-
-    // For std::vector
-    void insertionSort(std::vector<int>& arr, size_t left, size_t right);
-    void merge(std::vector<int>& arr, size_t left, size_t mid, size_t right);
-    void mergeInsertSort(std::vector<int>& arr, size_t left, size_t right);
-
-    // For std::list
-    void insertionSort(std::list<int>& arr);
-    void merge(std::list<int>& leftList, std::list<int>& rightList, std::list<int>& mergedList);
-    void mergeInsertSort(std::list<int>& arr);
+	private:
+	public:
+		PmergeMe();
+		PmergeMe(const PmergeMe &other);
+		PmergeMe &operator=(const PmergeMe &other);
+		~PmergeMe();
+		//methods
+		void	merge(std::vector<int>& vec, int left, int middle, int right);
+		void	mergeInsertSort(std::vector<int>& vec, int left, int right);
+		void	mergeInsertSort(std::vector<int>& vec);
+		void	mergeList(std::list<int>::iterator leftStart, std::list<int>::iterator leftEnd,
+               std::list<int>::iterator rightStart, std::list<int>::iterator rightEnd);
+		void	mergeInsertSort(std::list<int>& lst);
 };
-
-/*
-class PmergeMe {
-public:
-    void sort(const std::vector<int>& input);
-private:
-    static const size_t INSERTION_SORT_THRESHOLD = 10;
-    
-    void insertionSort(std::vector<int>& arr, size_t left, size_t right);
-    void mergeSort(std::vector<int>& arr, size_t left, size_t right);
-    void merge(std::vector<int>& arr, size_t left, size_t mid, size_t right);
-
-    void insertionSort(std::list<int>& arr);
-};
-*/
 
 #endif

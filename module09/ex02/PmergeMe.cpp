@@ -6,283 +6,152 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 13:54:05 by echavez-          #+#    #+#             */
-/*   Updated: 2024/07/24 16:46:12 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:30:41 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-void PmergeMe::insertionSort(std::vector<int>& arr, size_t left, size_t right) {
-    for (size_t i = left + 1; i <= right; ++i) {
-        int key = arr[i];
-        size_t j = i;
-        while (j > left && arr[j - 1] > key) {
-            arr[j] = arr[j - 1];
-            --j;
-        }
-        arr[j] = key;
-    }
+PmergeMe::PmergeMe() {
 }
 
-void PmergeMe::merge(std::vector<int>& arr, size_t left, size_t mid, size_t right) {
-    size_t n1 = mid - left + 1;
-    size_t n2 = right - mid;
+PmergeMe::PmergeMe(const PmergeMe &other) {
+	*this = other;
+}
 
-    std::vector<int> L(n1);
-    std::vector<int> R(n2);
+PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
+	(void)other;
+	return *this;
+}
 
-    for (size_t i = 0; i < n1; ++i)
-        L[i] = arr[left + i];
-    for (size_t j = 0; j < n2; ++j)
-        R[j] = arr[mid + 1 + j];
+PmergeMe::~PmergeMe() {
+}
 
-    size_t i = 0;
-    size_t j = 0;
-    size_t k = left;
+// Merge function for merging two sorted halves for std::vector
+void PmergeMe::merge(std::vector<int>& vec, int left, int middle, int right) {
+    int n1 = middle - left + 1;
+    int n2 = right - middle;
+
+    std::vector<int> leftVec(n1);
+    std::vector<int> rightVec(n2);
+
+    for (int i = 0; i < n1; ++i)
+        leftVec[i] = vec[left + i];
+    for (int i = 0; i < n2; ++i)
+        rightVec[i] = vec[middle + 1 + i];
+
+    int i = 0, j = 0, k = left;
     while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            ++i;
+        if (leftVec[i] <= rightVec[j]) {
+            vec[k] = leftVec[i];
+            i++;
         } else {
-            arr[k] = R[j];
-            ++j;
+            vec[k] = rightVec[j];
+            j++;
         }
-        ++k;
+        k++;
     }
-
     while (i < n1) {
-        arr[k] = L[i];
-        ++i;
-        ++k;
+        vec[k] = leftVec[i];
+        i++;
+        k++;
     }
-
     while (j < n2) {
-        arr[k] = R[j];
-        ++j;
-        ++k;
+        vec[k] = rightVec[j];
+        j++;
+        k++;
     }
 }
 
-void PmergeMe::mergeInsertSort(std::vector<int>& arr, size_t left, size_t right) {
-    if (right - left + 1 <= INSERTION_SORT_THRESHOLD) {
-        // If the segment is small, use insertion sort
-        insertionSort(arr, left, right);
-    } else {
-        if (left < right) {
-            size_t mid = left + (right - left) / 2;
-
-            // Recursively sort first and second halves
-            mergeInsertSort(arr, left, mid);
-            mergeInsertSort(arr, mid + 1, right);
-
-            // Merge the sorted halves
-            merge(arr, left, mid, right);
-        }
-    }
-}
-
-void PmergeMe::insertionSort(std::list<int>& arr) {
-    for (auto it = std::next(arr.begin()); it != arr.end(); ++it) {
-        int key = *it;
-        auto j = it;
-        while (j != arr.begin() && *std::prev(j) > key) {
-            *j = *std::prev(j);
-            --j;
-        }
-        *j = key;
-    }
-}
-
-void PmergeMe::merge(std::list<int>& leftList, std::list<int>& rightList, std::list<int>& mergedList) {
-    auto itL = leftList.begin();
-    auto itR = rightList.begin();
-
-    while (itL != leftList.end() && itR != rightList.end()) {
-        if (*itL <= *itR) {
-            mergedList.push_back(*itL);
-            ++itL;
+// Merge-Insertion Sort function for std::vector
+void PmergeMe::mergeInsertSort(std::vector<int>& vec, int left, int right) {
+    if (left < right) {
+        if (right - left < 10) {  // Insertion sort for small segments
+            for (int i = left + 1; i <= right; ++i) {
+                int key = vec[i];
+                int j = i - 1;
+                while (j >= left && vec[j] > key) {
+                    vec[j + 1] = vec[j];
+                    j--;
+                }
+                vec[j + 1] = key;
+            }
         } else {
-            mergedList.push_back(*itR);
-            ++itR;
-        }
-    }
-
-    while (itL != leftList.end()) {
-        mergedList.push_back(*itL);
-        ++itL;
-    }
-
-    while (itR != rightList.end()) {
-        mergedList.push_back(*itR);
-        ++itR;
-    }
-}
-
-void PmergeMe::mergeInsertSort(std::list<int>& arr) {
-    if (arr.size() <= INSERTION_SORT_THRESHOLD) {
-        // If the segment is small, use insertion sort
-        insertionSort(arr);
-    } else {
-        std::list<int> leftList, rightList;
-        auto it = arr.begin();
-        std::advance(it, arr.size() / 2);
-
-        leftList.splice(leftList.begin(), arr, arr.begin(), it);
-        rightList.splice(rightList.begin(), arr, it, arr.end());
-
-        mergeInsertSort(leftList);
-        mergeInsertSort(rightList);
-
-        arr.clear();
-        merge(leftList, rightList, arr);
-    }
-}
-
-void PmergeMe::sort(const std::vector<int>& input) {
-    std::vector<int> vectorData(input.begin(), input.end());
-
-    // Time the merge-insertion sort for vector
-    clock_t startVector = clock();
-    mergeInsertSort(vectorData, 0, vectorData.size() - 1);
-    clock_t endVector = clock();
-
-    std::list<int> listData(input.begin(), input.end());
-
-    // Time the merge-insertion sort for list
-    clock_t startList = clock();
-    mergeInsertSort(listData);
-    clock_t endList = clock();
-
-    // Print the unsorted input
-    std::cout << "Before: ";
-    for (std::vector<int>::const_iterator it = input.begin(); it != input.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-    // Print the sorted vector
-    std::cout << "After: ";
-    for (std::vector<int>::const_iterator it = vectorData.begin(); it != vectorData.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-    // Calculate and print the duration for vector sort
-    double vectorDuration = static_cast<double>(endVector - startVector) / CLOCKS_PER_SEC * 1e6; // microseconds
-    double listDuration = static_cast<double>(endList - startList) / CLOCKS_PER_SEC * 1e6; // microseconds
-
-    std::cout << "Time to process a range of " << vectorData.size() << " elements with std::vector : " << vectorDuration << " us" << std::endl;
-    std::cout << "Time to process a range of " << listData.size() << " elements with std::list : " << listDuration << " us" << std::endl;
-}
-
-
-/*
-void PmergeMe::insertionSort(std::vector<int>& arr, size_t left, size_t right) {
-    for (size_t i = left + 1; i <= right; ++i) {
-        int key = arr[i];
-        size_t j = i;
-        while (j > left && arr[j - 1] > key) {
-            arr[j] = arr[j - 1];
-            --j;
-        }
-        arr[j] = key;
-    }
-}
-
-void PmergeMe::mergeSort(std::vector<int>& arr, size_t left, size_t right) {
-    if (right - left + 1 <= INSERTION_SORT_THRESHOLD) {
-        insertionSort(arr, left, right);
-    } else {
-        if (left < right) {
-            size_t mid = left + (right - left) / 2;
-
-            mergeSort(arr, left, mid);
-            mergeSort(arr, mid + 1, right);
-
-            merge(arr, left, mid, right);
+            int middle = left + (right - left) / 2;
+            mergeInsertSort(vec, left, middle);
+            mergeInsertSort(vec, middle + 1, right);
+            merge(vec, left, middle, right);
         }
     }
 }
 
-void PmergeMe::merge(std::vector<int>& arr, size_t left, size_t mid, size_t right) {
-    size_t n1 = mid - left + 1;
-    size_t n2 = right - mid;
+void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
+    mergeInsertSort(vec, 0, vec.size() - 1);
+}
 
-    std::vector<int> L(n1);
-    std::vector<int> R(n2);
+// Merge function for merging two sorted halves for std::list
+void PmergeMe::mergeList(std::list<int>::iterator leftStart, std::list<int>::iterator leftEnd,
+               std::list<int>::iterator rightStart, std::list<int>::iterator rightEnd) {
+    std::list<int> mergedList;
+    std::list<int>::iterator left = leftStart;
+    std::list<int>::iterator right = rightStart;
 
-    for (size_t i = 0; i < n1; ++i)
-        L[i] = arr[left + i];
-    for (size_t j = 0; j < n2; ++j)
-        R[j] = arr[mid + 1 + j];
-
-    size_t i = 0;
-    size_t j = 0;
-    size_t k = left;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            ++i;
+    while (left != leftEnd && right != rightEnd) {
+        if (*left <= *right) {
+            mergedList.push_back(*left);
+            ++left;
         } else {
-            arr[k] = R[j];
-            ++j;
+            mergedList.push_back(*right);
+            ++right;
         }
-        ++k;
     }
-
-    while (i < n1) {
-        arr[k] = L[i];
-        ++i;
-        ++k;
+    while (left != leftEnd) {
+        mergedList.push_back(*left);
+        ++left;
     }
-
-    while (j < n2) {
-        arr[k] = R[j];
-        ++j;
-        ++k;
+    while (right != rightEnd) {
+        mergedList.push_back(*right);
+        ++right;
     }
+    std::copy(mergedList.begin(), mergedList.end(), leftStart);
 }
 
-void PmergeMe::insertionSort(std::list<int>& arr) {
-    for (std::list<int>::iterator it = arr.begin(); it != arr.end(); ++it) {
-        int key = *it;
-        std::list<int>::iterator j = it;
-        while (j != arr.begin() && *std::prev(j) > key) {
-            *j = *std::prev(j);
+// Merge-Insertion Sort function for std::list
+void PmergeMe::mergeInsertSort(std::list<int>& lst) {
+    if (lst.size() <= 1) return;
+
+    if (lst.size() < 10) {  // Insertion sort for small lists
+        for (std::list<int>::iterator it = ++lst.begin(); it != lst.end(); ++it) {
+            int key = *it;
+            std::list<int>::iterator j = it;
             --j;
+            while (j != lst.begin() && *j > key) {
+                std::list<int>::iterator next = j;
+                ++next;
+                *next = *j;
+                --j;
+            }
+            if (j == lst.begin() && *j > key) {
+                *it = *j;
+                *j = key;
+            } else {
+                std::list<int>::iterator next = j;
+                ++next;
+                *next = key;
+            }
         }
-        *j = key;
+    } else {
+        std::list<int>::iterator middle = lst.begin();
+        std::advance(middle, lst.size() / 2);
+        std::list<int> left(lst.begin(), middle);
+        std::list<int> right(middle, lst.end());
+
+        mergeInsertSort(left);
+        mergeInsertSort(right);
+
+        mergeList(left.begin(), left.end(), right.begin(), right.end());
+        lst.clear();
+        lst.splice(lst.begin(), left);
+        lst.splice(lst.end(), right);
     }
 }
-
-void PmergeMe::sort(const std::vector<int>& input) {
-    // Output unsorted data
-    std::cout << "Before: ";
-    for (std::vector<int>::const_iterator it = input.begin(); it != input.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-    // Sorting with std::vector
-    std::vector<int> vectorData(input.begin(), input.end());
-    clock_t startVector = clock();
-    mergeSort(vectorData, 0, vectorData.size() - 1);
-    clock_t endVector = clock();
-
-    // Sorting with std::list
-    std::list<int> listData(input.begin(), input.end());
-    clock_t startList = clock();
-    insertionSort(listData);
-    clock_t endList = clock();
-
-    // Output sorted data
-    std::cout << "After: ";
-    for (std::vector<int>::const_iterator it = vectorData.begin(); it != vectorData.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-    // Timing results
-    double vectorDuration = static_cast<double>(endVector - startVector) / CLOCKS_PER_SEC;
-    double listDuration = static_cast<double>(endList - startList) / CLOCKS_PER_SEC;
-
-    std::cout << "Time to process a range of " << vectorData.size() << " elements with std::vector : " << vectorDuration << " seconds" << std::endl;
-    std::cout << "Time to process a range of " << listData.size() << " elements with std::list : " << listDuration << " seconds" << std::endl;
-}
-*/
