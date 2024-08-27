@@ -4,6 +4,7 @@ phonebook
 accounting
 btc
 RPN
+PmergeMe
 
 *.replace
 replace_test
