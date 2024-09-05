@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:31:53 by echavez-          #+#    #+#             */
-/*   Updated: 2024/06/12 12:32:55 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:00:46 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,30 @@ BitcoinExchange &  BitcoinExchange::operator=(BitcoinExchange const & src) {
 }
 
 void BitcoinExchange::loadDatabase(void) {
-    std::ifstream file(DB);
-    std::string line;
-	std::string date;
-	std::string rateStr;
-	float rate;
-    // Skip the header
+    std::string	line;
+    std::string	date;
+    std::string	rateStr;
+    float		rate;
+	std::ifstream file(DB);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open the database file." << std::endl;
+        return;
+    }
     std::getline(file, line);
-    while (std::getline(file, line)) {
-		std::istringstream stream(line);
-		if (std::getline(stream, date, ',') && std::getline(stream, rateStr)) {
-        	rate = std::stof(rateStr);
-        	database[date] = rate;
-    	}
+    try {
+        while (std::getline(file, line)) {
+            std::istringstream stream(line);
+            if (std::getline(stream, date, ',') && std::getline(stream, rateStr)) {
+                std::istringstream rateStream(rateStr);
+                if (!(rateStream >> rate))
+                    throw std::runtime_error("Invalid rate format");
+                database[date] = rate;
+            } else {
+                throw std::runtime_error("Invalid line format");
+            }
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error while loading the database: " << e.what() << std::endl;
     }
 }
 
@@ -82,40 +93,46 @@ void BitcoinExchange::processInput(const std::string& filename) {
 }
 
 bool BitcoinExchange::isValidDate(const std::string& date) {
-	if (date.size() != 10 || date[4] != '-' || date[7] != '-') {
-		return false;
-	}
-	for (size_t i = 0; i < date.size(); i++) {
-		if (i == 4 || i == 7) {
-			continue;
-		}
-		if (!std::isdigit(date[i])) {
-			return false;
-		}
-	}
-	//check with stoi that the date is valid
-	int year = std::stoi(date.substr(0, 4));
-	int month = std::stoi(date.substr(5, 2));
-	int day = std::stoi(date.substr(8, 2));
-	if (year < 2009 || year > 2024 || month < 1 || month > 12 || day < 1 || day > 31) {
-		return false;
-	}
-	//if february
-	if (month == 2) {
-		if (day > 29) {
-			return false;
-		}
-		if (day == 29) {
-			if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
-				return false;
-			}
-		}
-	}
-	//if month has 30 days
-	if (month == 4 || month == 6 || month == 9 || month == 11) {
-		if (day == 31) {
-			return false;
-		}
-	}
-	return true;
+    if (date.size() != 10 || date[4] != '-' || date[7] != '-') {
+        return false;
+    }
+
+    for (size_t i = 0; i < date.size(); i++) {
+        if (i == 4 || i == 7) {
+            continue;
+        }
+        if (!std::isdigit(date[i])) {
+            return false;
+        }
+    }
+    int year, month, day;
+    std::istringstream yearStream(date.substr(0, 4));
+    std::istringstream monthStream(date.substr(5, 2));
+    std::istringstream dayStream(date.substr(8, 2));
+
+    if (!(yearStream >> year) || !(monthStream >> month) || !(dayStream >> day)) {
+        return false;
+    }
+    if (year < 2009 || year > 2024 || month < 1 || month > 12 || day < 1 || day > 31) {
+        return false;
+    }
+    // If February
+    if (month == 2) {
+        if (day > 29) {
+            return false;
+        }
+        if (day == 29) {
+            if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
+                return false;
+            }
+        }
+    }
+    // If the month has 30 days
+    if (month == 4 || month == 6 || month == 9 || month == 11) {
+        if (day == 31) {
+            return false;
+        }
+    }
+
+    return true;
 }
