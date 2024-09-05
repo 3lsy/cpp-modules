@@ -6,7 +6,7 @@
 /*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:31:53 by echavez-          #+#    #+#             */
-/*   Updated: 2024/09/05 16:00:46 by echavez-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:17:19 by echavez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ BitcoinExchange &  BitcoinExchange::operator=(BitcoinExchange const & src) {
 	if (this != &src) {
 		this->database = src.database;
 	}
-	return *this;
+	return (*this);
 }
 
 void BitcoinExchange::loadDatabase(void) {
@@ -35,7 +35,7 @@ void BitcoinExchange::loadDatabase(void) {
 	std::ifstream file(DB);
     if (!file.is_open()) {
         std::cerr << "Error: Could not open the database file." << std::endl;
-        return;
+        return ;
     }
     std::getline(file, line);
     try {
@@ -52,13 +52,17 @@ void BitcoinExchange::loadDatabase(void) {
         }
     } catch (const std::exception& e) {
         std::cerr << "Error while loading the database: " << e.what() << std::endl;
+		exit(1);
     }
 }
 
 void BitcoinExchange::processInput(const std::string& filename) {
-    std::ifstream file(filename);
     std::string line;
-    // Skip the header
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		std::cerr << "Error: Could not open the input file." << std::endl;
+		return ;
+	}
     std::getline(file, line);
     while (std::getline(file, line)) {
         std::istringstream stream(line);
@@ -94,15 +98,14 @@ void BitcoinExchange::processInput(const std::string& filename) {
 
 bool BitcoinExchange::isValidDate(const std::string& date) {
     if (date.size() != 10 || date[4] != '-' || date[7] != '-') {
-        return false;
+        return (false);
     }
-
     for (size_t i = 0; i < date.size(); i++) {
         if (i == 4 || i == 7) {
             continue;
         }
         if (!std::isdigit(date[i])) {
-            return false;
+            return (false);
         }
     }
     int year, month, day;
@@ -111,28 +114,27 @@ bool BitcoinExchange::isValidDate(const std::string& date) {
     std::istringstream dayStream(date.substr(8, 2));
 
     if (!(yearStream >> year) || !(monthStream >> month) || !(dayStream >> day)) {
-        return false;
+        return (false);
     }
     if (year < 2009 || year > 2024 || month < 1 || month > 12 || day < 1 || day > 31) {
-        return false;
+        return (false);
     }
     // If February
     if (month == 2) {
         if (day > 29) {
-            return false;
+            return (false);
         }
         if (day == 29) {
             if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
-                return false;
+                return (false);
             }
         }
     }
     // If the month has 30 days
     if (month == 4 || month == 6 || month == 9 || month == 11) {
         if (day == 31) {
-            return false;
+            return (false);
         }
     }
-
-    return true;
+    return (true);
 }
