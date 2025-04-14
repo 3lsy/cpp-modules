@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: echavez- <echavez-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 13:54:05 by echavez-          #+#    #+#             */
-/*   Updated: 2024/08/27 16:30:41 by echavez-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe() {
@@ -90,30 +78,11 @@ void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
 }
 
 // Merge function for merging two sorted halves for std::list
-void PmergeMe::mergeList(std::list<int>::iterator leftStart, std::list<int>::iterator leftEnd,
-               std::list<int>::iterator rightStart, std::list<int>::iterator rightEnd) {
-    std::list<int> mergedList;
-    std::list<int>::iterator left = leftStart;
-    std::list<int>::iterator right = rightStart;
-
-    while (left != leftEnd && right != rightEnd) {
-        if (*left <= *right) {
-            mergedList.push_back(*left);
-            ++left;
-        } else {
-            mergedList.push_back(*right);
-            ++right;
-        }
-    }
-    while (left != leftEnd) {
-        mergedList.push_back(*left);
-        ++left;
-    }
-    while (right != rightEnd) {
-        mergedList.push_back(*right);
-        ++right;
-    }
-    std::copy(mergedList.begin(), mergedList.end(), leftStart);
+void PmergeMe::mergeList(std::list<int>& lst, std::list<int>& left, std::list<int>& right) {
+    lst.clear();  // This is now unnecessary and can be removed
+    lst.splice(lst.end(), left);   // Efficiently splices the left list into lst (O(1))
+    lst.splice(lst.end(), right);  // Efficiently splices the right list into lst (O(1))
+    lst.sort();  // Sort after merging, O(n log n)
 }
 
 // Merge-Insertion Sort function for std::list
@@ -143,15 +112,14 @@ void PmergeMe::mergeInsertSort(std::list<int>& lst) {
     } else {
         std::list<int>::iterator middle = lst.begin();
         std::advance(middle, lst.size() / 2);
+        
+        // Define `left` and `right` lists properly
         std::list<int> left(lst.begin(), middle);
         std::list<int> right(middle, lst.end());
 
         mergeInsertSort(left);
         mergeInsertSort(right);
 
-        mergeList(left.begin(), left.end(), right.begin(), right.end());
-        lst.clear();
-        lst.splice(lst.begin(), left);
-        lst.splice(lst.end(), right);
+        mergeList(lst, left, right);  // Efficiently merge using splice() and sort()
     }
 }
