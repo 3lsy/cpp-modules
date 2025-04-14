@@ -79,11 +79,31 @@ void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
 
 // Merge function for merging two sorted halves for std::list
 void PmergeMe::mergeList(std::list<int>& lst, std::list<int>& left, std::list<int>& right) {
-    lst.clear();  // This is now unnecessary and can be removed
-    lst.splice(lst.end(), left);   // Efficiently splices the left list into lst (O(1))
-    lst.splice(lst.end(), right);  // Efficiently splices the right list into lst (O(1))
-    lst.sort();  // Sort after merging, O(n log n)
+    lst.clear();
+    std::list<int>::iterator itLeft = left.begin();
+    std::list<int>::iterator itRight = right.begin();
+
+    while (itLeft != left.end() && itRight != right.end()) {
+        if (*itLeft <= *itRight) {
+            lst.push_back(*itLeft);
+            ++itLeft;
+        } else {
+            lst.push_back(*itRight);
+            ++itRight;
+        }
+    }
+
+    while (itLeft != left.end()) {
+        lst.push_back(*itLeft);
+        ++itLeft;
+    }
+
+    while (itRight != right.end()) {
+        lst.push_back(*itRight);
+        ++itRight;
+    }
 }
+
 
 // Merge-Insertion Sort function for std::list
 void PmergeMe::mergeInsertSort(std::list<int>& lst) {
